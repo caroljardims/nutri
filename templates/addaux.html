@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block body%}
+
+<div class="container">
+	<h2>Auxiliares</h2>              
+	<ul class="nav nav-pills jumbotron" role="tablist">
+		<li><a href="/index/">Home</a></li>
+		<li><a href="#">Alimentos</a></li>
+		<li><a href="#">Preparações</a></li>
+		<li><a href="#">Cardápios</a></li>        
+	</ul>
+</div>
+<div class="container">
+	<h3>Adicionar Auxiliares</h3>
+	<a href="/aux/" class="volta" ><button type="button" class="btn btn-default">Cancelar</button></a>
+	<br /><br />
+	<form action="/addaux/" method="post" role="form">
+		{% csrf_token %}
+		{{form.management_form}}
+		<div class="form-group">
+			<label>Tipo</label>
+			<div class="radio">
+				<label><input type="radio" name="tipo" value="1"> Categoria de Alimentos </label>
+			</div>
+			<div class="radio">
+				<label><input type="radio" name="tipo" value="2"> Tipo de Preparo </label>
+			</div>
+			<div class="radio">
+				<label><input type="radio" name="tipo" value="3"> Cocção </label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label>Descrição</label>
+			<input type="text" class="form-control" name="desc" placeholder="Entre com a descrição" />
+		</div>
+
+	  <button type="submit" class="btn btn-info" value="Enviar">Enviar</button>
+	  </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+{% endblock %}

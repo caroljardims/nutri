@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block body%}
+
+<div class="container">
+	<h2>Auxiliares</h2>              
+	<ul class="nav nav-pills jumbotron" role="tablist">
+		<li><a href="/index/">Home</a></li>
+		<li><a href="#">Alimentos</a></li>
+		<li><a href="#">Preparações</a></li>
+		<li><a href="#">Cardápios</a></li>        
+	</ul>
+</div>
+<div class="container-fluid">
+	<a href="/addaux/"><button type="button" class="btn btn-info">Adicionar</button></a>
+
+	<h3>Lista de Auxiliares</h3>
+	<div class="col-sm-4">
+		{% if aux_list %}
+
+		<div class="thumbnail">
+			<h5> Categorias de Alimentos </h5>
+			{% for aux in aux_list %}
+			{% if aux.tipo == 1 %}
+			<ul class="list-group">
+			<li class="list-group-item">{{ aux.desc }}</li>
+			</ul>
+			{% endif %}
+			{% endfor %}
+		</div>	
+		<br />
+		<div class="thumbnail">
+			<h5> Tipos de Preparo </h5>
+			{% for aux in aux_list %}
+			{% if aux.tipo == 2 %}
+			<ul class="list-group">
+			<li class="list-group-item">{{ aux.desc }}</li>
+			</ul>
+			{% endif %}
+			{% endfor %}
+		</div>	
+		<br />
+		<div class="thumbnail">
+			<h5> Cocção </h5>
+			{% for aux in aux_list %}
+			{% if aux.tipo == 3 %}
+			<ul class="list-group">
+			<li class="list-group-item">{{ aux.desc }}</li>
+			</ul>
+			{% endif %}
+			{% endfor %}
+		</div>	
+		<br />
+
+		{% endif %}
+	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+{% endblock %}
