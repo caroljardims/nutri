@@ -60,11 +60,12 @@ def editaux(request, id_aux):
 	f = modelformset_factory(Aux,AuxForm)
 	form = f(request.POST or None)
 	aux = get_object_or_404(Aux, pk=id_aux)
-	delete = Aux.objects.get(pk=id_aux).delete()
+
 	if request.method == 'POST':
 		f_tipo = request.POST.get('tipo')
 		f_desc = request.POST.get('desc')
 		
+		aux = get_object_or_404(Aux, pk=id_aux)
 		if f_tipo: aux.tipo = f_tipo
 		if f_desc: aux.desc = f_desc
 		aux.save()
@@ -73,7 +74,110 @@ def editaux(request, id_aux):
 	return render(request,"editaux.html", context)
 
 
+    #############################
+    #                           #
+    #   CRUD Tabela Alimentos   #
+    #                           #
+    #############################
 
+
+def alimentos(request):
+	al_list = Alimentos.objects.all()
+	context = {'al_list':al_list}
+	return render_to_response('alimentos.html', context)
+
+def addalimento(request):
+	aux_list = Aux.objects.all()
+	f = modelformset_factory(Alimentos,AlimentosForm)
+	form = f(request.POST or None)
+	if request.method == 'POST':
+		f_categoria = request.POST.get('categoria')
+		f_desc = request.POST.get('desc')
+		f_cor = request.POST.get('cor')
+		alimento = Alimentos(cat_alimento_id=f_categoria, desc= f_desc, cor=f_cor)
+		alimento.save()
+		return redirect('/alimentos')
+	context = {'form': form, 'aux_list':aux_list}
+	return render(request,"addalimento.html", context)
+
+def deletealimento(request,id_alimentos):
+   alimento = Alimentos.objects.get(pk=id_alimentos).delete()
+   context = {'alimento':alimento}
+   return render(request,"delete.html", context)
+
+def editalimento(request, id_alimentos):
+	aux_list = Aux.objects.all()
+	f = modelformset_factory(Aux,AuxForm)
+	form = f(request.POST or None)
+	al = get_object_or_404(Alimentos, pk=id_alimentos)
+
+	if request.method == 'POST':
+		f_categoria = request.POST.get('categoria')
+		f_desc = request.POST.get('desc')
+		f_cor = request.POST.get('cor')
+
+		al = get_object_or_404(Alimentos, pk=id_alimentos)
+		if f_categoria: al.cat_alimento_id = f_categoria
+		if f_desc: al.desc = f_desc
+		if f_cor: al.cor = f_cor
+		al.save()
+		return redirect('/alimentos')
+	context = {'form': form, 'aux_list':aux_list, 'al':al}
+	return render(request,"editalimento.html", context)
+
+
+
+
+	###########################
+    #                         #
+    #   CRUD Tabela Prepara   #
+    #                         #
+    ###########################
+
+
+def prepara(request):
+	p_list = Prepara.objects.all()
+	context = {'p_list':p_list}
+	return render_to_response('prepara.html', context)
+
+def addprepara(request):
+	aux_list = Aux.objects.all()
+	f = modelformset_factory(Alimentos,AlimentosForm)
+	form = f(request.POST or None)
+	if request.method == 'POST':
+		f_categoria = request.POST.get('categoria')
+		f_desc = request.POST.get('desc')
+		f_cor = request.POST.get('cor')
+		alimento = Alimentos(cat_alimento_id=f_categoria, desc= f_desc, cor=f_cor)
+		alimento.save()
+		return redirect('/alimentos')
+	context = {'form': form, 'aux_list':aux_list}
+	return render(request,"addalimento.html", context)
+
+def deleteprepara(request,id_alimentos):
+   alimento = Alimentos.objects.get(pk=id_alimentos).delete()
+   context = {'alimento':alimento}
+   return render(request,"delete.html", context)
+
+def editprepara(request, id_alimentos):
+	aux_list = Aux.objects.all()
+	f = modelformset_factory(Aux,AuxForm)
+	form = f(request.POST or None)
+	al = get_object_or_404(Alimentos, pk=id_alimentos)
+
+	if request.method == 'POST':
+		f_categoria = request.POST.get('categoria')
+		f_desc = request.POST.get('desc')
+		f_cor = request.POST.get('cor')
+
+		al = get_object_or_404(Alimentos, pk=id_alimentos)
+		if f_categoria: al.cat_alimento_id = f_categoria
+		if f_desc: al.desc = f_desc
+		if f_cor: al.cor = f_cor
+		al.save()
+		return redirect('/alimentos')
+	context = {'form': form, 'aux_list':aux_list, 'al':al}
+	return render(request,"editalimento.html", context)
 
 
 

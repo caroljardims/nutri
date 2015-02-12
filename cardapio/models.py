@@ -9,7 +9,7 @@ class Aux(models.Model):
 
 class Alimentos(models.Model):
 	desc = models.CharField(max_length=20)
-	cat_alimento = models.ForeignKey('Aux')
+	cat_alimento = models.ForeignKey(Aux)
 	cor = models.CharField(max_length=10)
 	def __unicode__(self):
 		return self.desc
@@ -26,7 +26,7 @@ class Prepara(models.Model):
 
 class Prep_Alimentos(models.Model):
 	desc = models.CharField(max_length=40)
-	alimento = models.ForeignKey('Alimentos')
-	prep = models.ForeignKey('Prepara')
+	alimento = models.ForeignKey(Alimentos)
+	prep = models.ForeignKey(Prepara)
 	def __unicode__(self):
 		return self.desc

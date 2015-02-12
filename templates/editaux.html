@@ -2,9 +2,9 @@
 
 {% block body%}
 <div class="container">
-	<h3>Adicionar Auxiliares</h3>
+	<h3>Editar Auxiliar</h3>
 	<br /><br />
-	<form action="/addaux/" method="post" role="form">
+	<form action="" method="post" role="form" class="col-sm-4">
 		{% csrf_token %}
 		{{form.management_form}}
 		<div class="form-group">
@@ -43,7 +43,8 @@
 		</div>
 
 	  <button type="submit" class="btn btn-info" value="Editar">Editar</button>
-	  <a href="/aux/"><button type="button" class="btn btn-danger">Deletar</button></a>
+	  <a href="/deleteaux/{{ aux.id }}"><button type="button" class="btn btn-danger">Deletar</button></a>
+	  <a href="/aux/"><button type="button" class="btn btn-default">Cancelar</button></a>
 	  </form>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

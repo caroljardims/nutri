@@ -2,29 +2,30 @@
 
 {% block body%}
 <div class="container">
-	<h3>Adicionar Auxiliar</h3>
-	<a href="/aux/" class="volta" ><button type="button" class="btn btn-default">Cancelar</button></a>
+	<h3>Adicionar Alimento</h3>
+	<a href="/alimentos/" class="volta" ><button type="button" class="btn btn-default">Cancelar</button></a>
 	<br /><br />
-	<form action="/addaux/" method="post" role="form" class="col-sm-4">
+	<form action="/addalimento/" method="post" role="form" class="col-sm-4">
 		{% csrf_token %}
 		{{form.management_form}}
 		<div class="form-group">
-			<label>Tipo</label>
-			<div class="radio">
-				<label><input type="radio" name="tipo" value="1"> Categoria de Alimentos </label>
-			</div>
-			<div class="radio">
-				<label><input type="radio" name="tipo" value="2"> Tipo de Preparo </label>
-			</div>
-			<div class="radio">
-				<label><input type="radio" name="tipo" value="3"> Cocção </label>
-			</div>
+			<label>Categoria</label>
+			<select type="text" name="categoria" >
+			{% for a in aux_list %}
+			{% if a.tipo == 1 %}
+			<option value="{{ a.id }}"> {{ a.desc }} </option>
+			{% endif %}
+			{% endfor %}
+			</select><br />
 		</div>
 		<div class="form-group">
 			<label>Descrição</label>
 			<input type="text" class="form-control" name="desc" placeholder="Entre com a descrição" />
 		</div>
-
+		<div class="form-group">
+			<label>Cor</label>
+			<input type="color" name="cor" value="#ffffff">
+		</div>
 	  <button type="submit" class="btn btn-info" value="Enviar">Enviar</button>
 	  </form>
 </div>
