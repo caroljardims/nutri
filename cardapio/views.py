@@ -162,6 +162,11 @@ def addprepara(request):
 	context = {'form': form, 'aux_list':aux_list}
 	return render(request,"addprepara.html", context)
 
+def verprepara(request, id_prepara):
+	p = get_object_or_404(Prepara, pk=id_prepara)
+	context = {'p':p}
+	return render(request,"verprepara.html", context)
+
 def deleteprepara(request,id_alimentos):
    alimento = Alimentos.objects.get(pk=id_alimentos).delete()
    context = {'alimento':alimento}
