@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^index/', 'cardapio.views.index', name='index'),
     url(r'^aux/', 'cardapio.views.aux', name='aux'),
     url(r'^addaux/', 'cardapio.views.addaux', name='addaux'),
+    url(r'editaux/(?P<id_aux>\d+)/$', 'cardapio.views.editaux', name='editaux'),
+    url(r'deleteaux/(?P<id_aux>\d+)/$', 'cardapio.views.deleteaux', name='deleteaux'),
 
  ]
