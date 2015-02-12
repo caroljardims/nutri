@@ -4,12 +4,11 @@
 <div class="container-fluid">
 	<div class="container">
 			<h2>Auxiliares</h2>           
-			<a href="/addalimento/"><button type="button" class="btn btn-info">Adicionar</button></a>
+			<a href="/addprepara/"><button type="button" class="btn btn-info">Adicionar</button></a>
 			<h3>Lista de Preparações</h3>
 		{% if p_list %}
 
-		<div class="thumbnail col-sm-6">
-		<!--	
+		<div class="thumbnail col-sm-6">	
 			{% for a in p_list %}
 			<ul class="list-group">
 			<li class="list-group-item">{{ a.desc }} - 
@@ -18,7 +17,6 @@
 			</li>
 			</ul>
 			{% endfor %}
-		-->
 		{% endif %} 
 	</div>
 </div>

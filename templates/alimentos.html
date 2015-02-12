@@ -12,6 +12,7 @@
 			{% for a in al_list %}
 			<ul class="list-group">
 			<li class="list-group-item">{{ a.desc }} - 
+				<a href="/veralimento/{{ a.id }}"> Info</a> / 
 				<a href="/editalimento/{{ a.id }}"> Editar</a> / 
 				<a href="/deletealimento/{{ a.id }}"> Deletar </a>
 			</li>

@@ -100,6 +100,11 @@ def addalimento(request):
 	context = {'form': form, 'aux_list':aux_list}
 	return render(request,"addalimento.html", context)
 
+def veralimento(request, id_alimentos):
+	al = get_object_or_404(Alimentos, pk=id_alimentos)
+	context = {'al':al}
+	return render(request,"veralimento.html", context)
+
 def deletealimento(request,id_alimentos):
    alimento = Alimentos.objects.get(pk=id_alimentos).delete()
    context = {'alimento':alimento}
@@ -145,14 +150,17 @@ def addprepara(request):
 	f = modelformset_factory(Alimentos,AlimentosForm)
 	form = f(request.POST or None)
 	if request.method == 'POST':
-		f_categoria = request.POST.get('categoria')
 		f_desc = request.POST.get('desc')
+		f_inNatura = request.POST.get('inNatura')
+		f_enxofre = request.POST.get('enxofre')
+		f_tipo = request.POST.get('tipo')
+		f_coccao = request.POST.get('coccao')
 		f_cor = request.POST.get('cor')
-		alimento = Alimentos(cat_alimento_id=f_categoria, desc= f_desc, cor=f_cor)
-		alimento.save()
-		return redirect('/alimentos')
+		prepara = Prepara(desc=f_desc,inNatura=f_inNatura,enxofre=f_enxofre,tipoPrep=f_tipo,coccao=f_coccao,cor=f_cor)
+		prepara.save()
+		return redirect('/prepara')
 	context = {'form': form, 'aux_list':aux_list}
-	return render(request,"addalimento.html", context)
+	return render(request,"addprepara.html", context)
 
 def deleteprepara(request,id_alimentos):
    alimento = Alimentos.objects.get(pk=id_alimentos).delete()
