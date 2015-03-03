@@ -7,14 +7,13 @@
 			<a href="/addprepara/"><button type="button" class="btn btn-info">Adicionar</button></a>
 			<h3>Lista de Preparações</h3>
 		{% if p_list %}
-
 		<div class="thumbnail col-sm-6">	
 			{% for a in p_list %}
 			<ul class="list-group">
 			<li class="list-group-item">{{ a.desc }} - 
-				<a href="/verprepara/{{ a.id }}">Info</a> 
-				<!-- <a href="/editalimento/{{ a.id }}"> Editar</a> / 
-				<a href="/deletealimento/{{ a.id }}"> Deletar </a> -->
+				<a href="/verprepara/{{ a.id }}">Info</a> / 
+				<a href="/editprepara/{{ a.id }}"> Editar</a> / 
+				<a href="/deleteprepara/{{ a.id }}"> Deletar </a>
 			</li>
 			</ul>
 			{% endfor %}

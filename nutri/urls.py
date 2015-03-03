@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^prepara/', 'cardapio.views.prepara', name='prepara'),
     url(r'^addprepara/', 'cardapio.views.addprepara', name='addprepara'),
     url(r'verprepara/(?P<id_prepara>\d+)/$', 'cardapio.views.verprepara', name='verprepara'),
+    url(r'deleteprepara/(?P<id_prepara>\d+)/$', 'cardapio.views.deleteprepara', name='deleteprepara'),
+    url(r'editprepara/(?P<id_prepara>\d+)/$', 'cardapio.views.editprepara', name='editprepara'),
 
  ]

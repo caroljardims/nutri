@@ -167,30 +167,36 @@ def verprepara(request, id_prepara):
 	context = {'p':p}
 	return render(request,"verprepara.html", context)
 
-def deleteprepara(request,id_alimentos):
-   alimento = Alimentos.objects.get(pk=id_alimentos).delete()
-   context = {'alimento':alimento}
+def deleteprepara(request,id_prepara):
+   prepara = Prepara.objects.get(pk=id_prepara).delete()
+   context = {'prepara':prepara}
    return render(request,"delete.html", context)
 
-def editprepara(request, id_alimentos):
+def editprepara(request, id_prepara):
 	aux_list = Aux.objects.all()
 	f = modelformset_factory(Aux,AuxForm)
 	form = f(request.POST or None)
-	al = get_object_or_404(Alimentos, pk=id_alimentos)
+	al = get_object_or_404(Prepara, pk=id_prepara)
 
 	if request.method == 'POST':
-		f_categoria = request.POST.get('categoria')
 		f_desc = request.POST.get('desc')
+		f_inNatura = request.POST.get('inNatura')
+		f_enxofre = request.POST.get('enxofre')
+		f_tipo = request.POST.get('tipo')
+		f_coccao = request.POST.get('coccao')
 		f_cor = request.POST.get('cor')
 
-		al = get_object_or_404(Alimentos, pk=id_alimentos)
-		if f_categoria: al.cat_alimento_id = f_categoria
+		al = get_object_or_404(Prepara, pk=id_prepara)
+		if f_tipo: al.tipo = f_tipo
+		if f_coccao: al.coccao = f_coccao
+		if f_inNatura: al.inNatura = f_inNatura
+		if f_enxofre: al.enxofre = f_enxofre
 		if f_desc: al.desc = f_desc
 		if f_cor: al.cor = f_cor
 		al.save()
-		return redirect('/alimentos')
+		return redirect('/prepara')
 	context = {'form': form, 'aux_list':aux_list, 'al':al}
-	return render(request,"editalimento.html", context)
+	return render(request,"editprepara.html", context)
 
 
 
