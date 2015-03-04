@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block body%}
+<div class="container-fluid">
+	<div class="container">         
+		<br /><br /><br />
+			<h3>Preparação de {{ p.desc }}</h3>
+	<form class="form-horizontal" action="" method="post" role="form">
+				{% csrf_token %}
+		{{form.management_form}}
+<fieldset>
+
+<!-- Form Name -->
+<legend>Adicionar Alimentos</legend>
+
+<!-- Select Multiple -->
+ <div class="col-md-4">
+    <select id="selectmultiple" name="selectmultiple" class="form-control" multiple="multiple">
+    {% if prep_al_list %}
+			
+			{% for a in prep_al_list %}
+
+					<option>{{ a.desc }}</option>
+			{% endfor %}
+	{% endif %}
+    </select>
+  </div>
+  <div class="col-md-1">
+  	<br />
+  <button type="submit" class="btn btn-danger" value="Editar"> >> </button>
+  <br />
+
+</div>
+</form>
+<form class="form-horizontal" action="" method="post" role="form">
+				{% csrf_token %}
+		{{form.management_form}}
+<div class="col-md-1">
+	<br />
+  <button type="submit" class="btn btn-info" value="Editar"> << </button>
+  <br />
+</div>
+  <div class="col-md-4">
+    <select id="selectmultiple" name="selectmultiple" class="form-control" multiple="multiple">
+    {% if al_list %}
+			
+			{% for a in al_list %}
+
+					<option>{{ a.desc }}</option>
+			{% endfor %}
+	{% endif %}
+    </select>
+  </div>
+
+</fieldset>
+</form> 
+
+		
+	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+{% endblock %}

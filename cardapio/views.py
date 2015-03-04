@@ -142,7 +142,8 @@ def editalimento(request, id_alimentos):
 
 def prepara(request):
 	p_list = Prepara.objects.all()
-	context = {'p_list':p_list}
+	aux_list = Aux.objects.all()
+	context = {'p_list':p_list,'aux_list':aux_list}
 	return render_to_response('prepara.html', context)
 
 def addprepara(request):
@@ -187,7 +188,7 @@ def editprepara(request, id_prepara):
 		f_cor = request.POST.get('cor')
 
 		al = get_object_or_404(Prepara, pk=id_prepara)
-		if f_tipo: al.tipo = f_tipo
+		if f_tipo: al.tipoPrep = f_tipo
 		if f_coccao: al.coccao = f_coccao
 		if f_inNatura: al.inNatura = f_inNatura
 		if f_enxofre: al.enxofre = f_enxofre
@@ -198,9 +199,19 @@ def editprepara(request, id_prepara):
 	context = {'form': form, 'aux_list':aux_list, 'al':al}
 	return render(request,"editprepara.html", context)
 
+	#############################
+    #                           #
+    #   Tabela Prep Alimentos   #
+    #                           #
+    #############################
 
 
-
+def prep_alimentos(request,id_prepara):
+	al_list = Alimentos.objects.all()
+	prep_al_list = Prep_Alimentos.objects.all()
+	p = get_object_or_404(Prepara, pk=id_prepara)
+	context = {'al_list':al_list,'p':p,'prep_al_list':prep_al_list}
+	return render(request,"prep-alimentos.html", context)
 
 
 

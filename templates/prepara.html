@@ -7,18 +7,28 @@
 			<a href="/addprepara/"><button type="button" class="btn btn-info">Adicionar</button></a>
 			<h3>Lista de Preparações</h3>
 		{% if p_list %}
-		<div class="thumbnail col-sm-6">	
-			{% for a in p_list %}
-			<ul class="list-group">
-			<li class="list-group-item">{{ a.desc }} - 
-				<a href="/verprepara/{{ a.id }}">Info</a> / 
-				<a href="/editprepara/{{ a.id }}"> Editar</a> / 
-				<a href="/deleteprepara/{{ a.id }}"> Deletar </a>
-			</li>
-			</ul>
+			{% for t in aux_list %}				
+				{% if t.tipo == 2 %}
+				<div class="thumbnail col-sm-3">
+					{{ t.desc }}
+					
+					{% for a in p_list %}
+					{% if a.tipoPrep == t.desc %}
+					<ul class="list-group">
+					<li class="list-group-item">
+						<a href="/verprepara/{{ a.id }}"> {{ a.desc }}</a> - 
+						<a href="/editprepara/{{ a.id }}"> Editar</a> / 
+						<a href="/deleteprepara/{{ a.id }}"> Deletar </a> / 
+						<a href="/prep_alimentos/{{ a.id }}"> Adicionar Alimentos </a>
+					</li>
+					</ul>
+					{% endif %}
+				{% endfor %}
+				</div>
+				{% endif %}
 			{% endfor %}
 		{% endif %} 
-	</div>
+	
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

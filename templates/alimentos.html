@@ -11,8 +11,7 @@
 		<div class="thumbnail col-sm-6">
 			{% for a in al_list %}
 			<ul class="list-group">
-			<li class="list-group-item">{{ a.desc }} - 
-				<a href="/veralimento/{{ a.id }}"> Info</a> / 
+			<li class="list-group-item"><a href="/veralimento/{{ a.id }}"> {{ a.desc }} </a> - 
 				<a href="/editalimento/{{ a.id }}"> Editar</a> / 
 				<a href="/deletealimento/{{ a.id }}"> Deletar </a>
 			</li>
