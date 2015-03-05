@@ -225,26 +225,26 @@ def prep_alimentos(request,id_prepara):
 	f = modelformset_factory(Prep_Alimentos,PrepAlimentosForm)
 	form = f(request.POST or None)
 	
+
 	if request.method == 'POST' and 'add' in request.POST:
 		f_alimento = request.POST.get('alimento')
 		f_desc = prepara.desc
 		f_prep = id_prepara
 		PrepAl = Prep_Alimentos(prep_id=f_prep, desc= f_desc, alimento_id= f_alimento)
 		PrepAl.save()
-		return redirect('/prepara/')
+		context = {'form': form,'lista':lista,'p':prepara,'prep_al_list':prep_al_list,'contem_list':contem_list}
+		return redirect('/prepara')
 
 	if request.method == 'POST' and 'delete' in request.POST:
 		f_alimento = request.POST.get('alimento')
 		for a in lista1:
 			if a.alimento.desc == f_alimento and a.prep.desc == prepara.desc:
 				a.delete()
-				return redirect('/prepara/')
-		return redirect('/prepara/')
+				context = {'form': form,'lista':lista,'p':prepara,'prep_al_list':prep_al_list,'contem_list':contem_list}
+				return redirect('/prepara')
 		
-	context = {'form': form}
-	context = {'lista':lista,'p':prepara,'prep_al_list':prep_al_list,'contem_list':contem_list,'lista1':lista1}
+	context = {'form': form,'lista':lista,'p':prepara,'prep_al_list':prep_al_list,'contem_list':contem_list}
 	return render(request,"prep-alimentos.html", context)
-
 
 
 
