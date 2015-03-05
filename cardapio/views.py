@@ -208,23 +208,42 @@ def editprepara(request, id_prepara):
 
 def prep_alimentos(request,id_prepara):
 	al_list = Alimentos.objects.all()
-	prep_al_list = Prep_Alimentos.objects.all()
-	p = get_object_or_404(Prepara, pk=id_prepara)
-	context = {'al_list':al_list,'p':p,'prep_al_list':prep_al_list}
+	prepara = get_object_or_404(Prepara, pk=id_prepara)
+	lista = Prep_Alimentos.objects.all()
+	lista1 = Prep_Alimentos.objects.all()
+	prep_al_list = []
+	contem_list = []
+
+	for o in lista:
+		if o.desc == prepara.desc:
+			prep_al_list.append(o)
+	
+	for p in prep_al_list:
+		contem_list.append(p.alimento)
+	
+	lista = list(set(al_list)-set(contem_list))
+	f = modelformset_factory(Prep_Alimentos,PrepAlimentosForm)
+	form = f(request.POST or None)
+	
+	if request.method == 'POST' and 'add' in request.POST:
+		f_alimento = request.POST.get('alimento')
+		f_desc = prepara.desc
+		f_prep = id_prepara
+		PrepAl = Prep_Alimentos(prep_id=f_prep, desc= f_desc, alimento_id= f_alimento)
+		PrepAl.save()
+		return redirect('/prepara/')
+
+	if request.method == 'POST' and 'delete' in request.POST:
+		f_alimento = request.POST.get('alimento')
+		for a in lista1:
+			if a.alimento.desc == f_alimento and a.prep.desc == prepara.desc:
+				a.delete()
+				return redirect('/prepara/')
+		return redirect('/prepara/')
+		
+	context = {'form': form}
+	context = {'lista':lista,'p':prepara,'prep_al_list':prep_al_list,'contem_list':contem_list,'lista1':lista1}
 	return render(request,"prep-alimentos.html", context)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

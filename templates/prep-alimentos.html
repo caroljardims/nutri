@@ -15,38 +15,38 @@
 
 <!-- Select Multiple -->
  <div class="col-md-4">
-    <select id="selectmultiple" name="selectmultiple" class="form-control" multiple="multiple">
+    <select id="selectmultiple" name="alimento" class="form-control" multiple="multiple">
     {% if prep_al_list %}
 			
-			{% for a in prep_al_list %}
-
-					<option>{{ a.desc }}</option>
+			{% for a in contem_list %}
+					<option value="{{ a.desc }}">{{ a.desc }}</option>
 			{% endfor %}
 	{% endif %}
+	
     </select>
   </div>
+
   <div class="col-md-1">
   	<br />
-  <button type="submit" class="btn btn-danger" value="Editar"> >> </button>
+  <button type="submit" class="btn btn-danger" value="delete" name="delete"> >> </button>
   <br />
 
 </div>
 </form>
-<form class="form-horizontal" action="" method="post" role="form">
+<form class="form-horizontal" action="" method="post" name="adiciona" role="form">
 				{% csrf_token %}
 		{{form.management_form}}
 <div class="col-md-1">
 	<br />
-  <button type="submit" class="btn btn-info" value="Editar"> << </button>
+  <button type="submit" class="btn btn-info" value="add" name="add"> << </button>
   <br />
 </div>
   <div class="col-md-4">
-    <select id="selectmultiple" name="selectmultiple" class="form-control" multiple="multiple">
-    {% if al_list %}
+    <select id="selectmultiple" name="alimento" class="form-control" multiple="multiple">
+    {% if lista %}
 			
-			{% for a in al_list %}
-
-					<option>{{ a.desc }}</option>
+			{% for a in lista %}
+					<option value="{{ a.id }}">{{ a.desc }}</option>
 			{% endfor %}
 	{% endif %}
     </select>
