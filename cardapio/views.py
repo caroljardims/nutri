@@ -233,7 +233,7 @@ def prep_alimentos(request,id_prepara):
 		PrepAl = Prep_Alimentos(prep_id=f_prep, desc= f_desc, alimento_id= f_alimento)
 		PrepAl.save()
 		context = {'form': form,'lista':lista,'p':prepara,'prep_al_list':prep_al_list,'contem_list':contem_list}
-		return redirect('/prepara')
+		return redirect('/prep_alimentos/' + id_prepara)
 
 	if request.method == 'POST' and 'delete' in request.POST:
 		f_alimento = request.POST.get('alimento')
@@ -241,7 +241,7 @@ def prep_alimentos(request,id_prepara):
 			if a.alimento.desc == f_alimento and a.prep.desc == prepara.desc:
 				a.delete()
 				context = {'form': form,'lista':lista,'p':prepara,'prep_al_list':prep_al_list,'contem_list':contem_list}
-				return redirect('/prepara')
+				return redirect('/prep_alimentos/' + id_prepara)
 		
 	context = {'form': form,'lista':lista,'p':prepara,'prep_al_list':prep_al_list,'contem_list':contem_list}
 	return render(request,"prep-alimentos.html", context)
