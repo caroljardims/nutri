@@ -26,6 +26,14 @@
 				Não
 				{% endif %}</p>
 				<p>Cor: {{ p.cor }}</p>
+
+				{% if lista %}
+				<p>Alimentos:
+					{% for i in lista %}
+						<br /> - {{ i }}  
+					{% endfor %}
+				{% endif %}
+				</p>
 			</div>
 
 </div>

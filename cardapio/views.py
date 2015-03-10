@@ -165,7 +165,17 @@ def addprepara(request):
 
 def verprepara(request, id_prepara):
 	p = get_object_or_404(Prepara, pk=id_prepara)
-	context = {'p':p}
+	al_list = Alimentos.objects.all()
+	lista = Prep_Alimentos.objects.all()
+	prep_al_list = []
+	contem_list = []
+	for o in lista:
+		if o.desc == p.desc:
+			prep_al_list.append(o)
+	for x in prep_al_list:
+		contem_list.append(x.alimento)
+
+	context = {'p':p,'lista':contem_list}
 	return render(request,"verprepara.html", context)
 
 def deleteprepara(request,id_prepara):
@@ -217,11 +227,11 @@ def prep_alimentos(request,id_prepara):
 	for o in lista:
 		if o.desc == prepara.desc:
 			prep_al_list.append(o)
-	
 	for p in prep_al_list:
 		contem_list.append(p.alimento)
 	
 	lista = list(set(al_list)-set(contem_list))
+
 	f = modelformset_factory(Prep_Alimentos,PrepAlimentosForm)
 	form = f(request.POST or None)
 	
