@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block body%}
+<div class="container-fluid">
+	<div class="container">
+			<h2>Auxiliares</h2>           
+			<a href="/addcardapio/"><button type="button" class="btn btn-info">Adicionar</button></a>
+			<h3>Cardápios</h3>
+		{% if c_list %}
+			<div class="thumbnail col-sm-6">
+				{% for c in c_list %}
+				<ul class="list-group">
+				<li class="list-group-item">
+					<label>Dia: <a href="/vercardapio/{{ c.id }}"> {{ c.data }}</a> </label>- 
+					<a href="/editcardapio/{{ c.id }}"> Editar</a> / 
+					<a href="/deletecardapio/{{ c.id }}"> Deletar </a> / 
+					<a href="/addcardprep/{{ c.id }}"> Adicionar Preparações </a>
+				</li>
+				</ul>
+			{% endfor %}
+			</div>
+		{% endif %} 
+	
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+{% endblock %}

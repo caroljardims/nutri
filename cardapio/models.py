@@ -30,3 +30,14 @@ class Prep_Alimentos(models.Model):
 	prep = models.ForeignKey(Prepara)
 	def __unicode__(self):
 		return self.desc
+
+class Dia_Cardapio(models.Model):
+	data = models.CharField(max_length=10)
+	def __unicode__(self):
+		return self.data
+
+class Cardapio_Prep(models.Model):
+	dia = models.ForeignKey(Dia_Cardapio)
+	prep = models.ForeignKey(Prepara)
+	def __unicode__(self):
+		return self.dia.data

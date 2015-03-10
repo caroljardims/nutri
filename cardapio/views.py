@@ -209,6 +209,7 @@ def editprepara(request, id_prepara):
 	context = {'form': form, 'aux_list':aux_list, 'al':al}
 	return render(request,"editprepara.html", context)
 
+
 	#############################
     #                           #
     #   Tabela Prep Alimentos   #
@@ -253,6 +254,59 @@ def prep_alimentos(request,id_prepara):
 		
 	context = {'form': form,'lista':lista,'p':prepara,'prep_al_list':prep_al_list,'contem_list':contem_list}
 	return render(request,"prep-alimentos.html", context)
+
+
+	#######################
+    #                     #
+    #   Tabela Cardapio   #
+    #                     #
+    #######################
+
+
+def cardapios(request):
+	c_list = Dia_Cardapio.objects.all()
+	context = {'c_list':c_list}
+	return render_to_response('cardapios.html', context)
+
+
+def addcardapio(request):
+	f = modelformset_factory(Dia_Cardapio,DiaCardapioForm)
+	form = f(request.POST or None)
+	if request.method == 'POST':
+		f_dia = request.POST.get('dia')
+		f_mes = request.POST.get('mes')
+		data = f_dia + '/' + f_mes
+		dia = Dia_Cardapio(data=data)
+		dia.save()
+		return redirect('/cardapios')
+	context = {'form': form}
+	return render(request,"addcardapio.html", context)
+
+
+def deletecardapio(request,id_dia_cardapio):
+   dia = Dia_Cardapio.objects.get(pk=id_dia_cardapio).delete()
+   context = {'dia':dia}
+   return render(request,"delete.html", context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
