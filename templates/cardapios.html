@@ -11,10 +11,10 @@
 				{% for c in c_list %}
 				<ul class="list-group">
 				<li class="list-group-item">
-					<label>Dia: <a href="/vercardapio/{{ c.id }}"> {{ c.data }}</a> </label>- 
+					<label>Dia: <a href="/vercardapio/{{ c.id }}"> {{ c.data }}</a> </label> - 
 					<a href="/editcardapio/{{ c.id }}"> Editar</a> / 
 					<a href="/deletecardapio/{{ c.id }}"> Deletar </a> / 
-					<a href="/addcardprep/{{ c.id }}"> Adicionar Preparações </a>
+					<a href="/prep_cardapio/{{ c.id }}"> Adicionar Preparações </a>
 				</li>
 				</ul>
 			{% endfor %}

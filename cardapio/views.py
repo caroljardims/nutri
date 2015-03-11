@@ -283,11 +283,68 @@ def addcardapio(request):
 	return render(request,"addcardapio.html", context)
 
 
+def vercardapio(request,id_dia_cardapio):
+	p_card = Cardapio_Prep.objects.all()
+	c = get_object_or_404(Dia_Cardapio, pk=id_dia_cardapio)
+
+	context = {'p_card':p_card,'c':c}
+	return render(request,"vercardapio.html",context)
+
+
 def deletecardapio(request,id_dia_cardapio):
    dia = Dia_Cardapio.objects.get(pk=id_dia_cardapio).delete()
    context = {'dia':dia}
    return render(request,"delete.html", context)
 
+def editcardapio(request,id_dia_cardapio):
+	f = modelformset_factory(Dia_Cardapio,DiaCardapioForm)
+	form = f(request.POST or None)
+	if request.method == 'POST':
+		f_dia = request.POST.get('dia')
+		f_mes = request.POST.get('mes')
+		data = f_dia + '/' + f_mes
+		
+		c = get_object_or_404(Dia_Cardapio, pk=id_dia_cardapio)
+		if f_dia and f_mes:
+			c.data = data
+			c.save()
+		return redirect('/cardapios')
+	context = {'form': form}
+	return render(request,"editcardapio.html", context)
+
+def prep_cardapio(request,id_dia_cardapio):
+	c = get_object_or_404(Dia_Cardapio, pk=id_dia_cardapio)
+	prepara = Prepara.objects.all()
+	lista = Cardapio_Prep.objects.all()
+	lista1 = Cardapio_Prep.objects.all()
+	card_list = []
+	contem_list = []
+
+	for o in lista:
+		if o.dia.data == c.data:
+			card_list.append(o)
+	for p in card_list:
+		contem_list.append(p.prep)
+	
+	lista = list(set(prepara)-set(contem_list))
+
+	f = modelformset_factory(Cardapio_Prep,CardapioPrepForm)
+	form = f(request.POST or None)
+
+	if request.method == 'POST' and 'add' in request.POST:
+		f_prep = request.POST.get('prep')
+		card = Cardapio_Prep(prep_id=f_prep, dia_id = id_dia_cardapio).save()
+		return redirect('/prep_cardapio/' + id_dia_cardapio)
+
+	if request.method == 'POST' and 'delete' in request.POST:
+		f_prep = request.POST.get('prep')
+		for a in lista1:
+			if a.prep.desc == f_prep and a.dia.data == c.data:
+				a.delete()
+				return redirect('/prep_cardapio/' + id_dia_cardapio)
+		
+	context = {'form': form,'lista':lista,'c':c,'card_list':card_list,'contem_list':contem_list}
+	return render(request,"prep-cardapio.html", context)
 
 
 

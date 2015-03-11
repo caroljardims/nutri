@@ -30,6 +30,9 @@ urlpatterns = [
     # CARDAPIOS
     url(r'^cardapios/', 'cardapio.views.cardapios', name='cardapios'),
     url(r'^addcardapio/', 'cardapio.views.addcardapio', name='addcardapio'),
+    url(r'vercardapio/(?P<id_dia_cardapio>\d+)/$', 'cardapio.views.vercardapio', name='vercardapio'),
     url(r'deletecardapio/(?P<id_dia_cardapio>\d+)/$', 'cardapio.views.deletecardapio', name='deletecardapio'),
+    url(r'editcardapio/(?P<id_dia_cardapio>\d+)/$', 'cardapio.views.editcardapio', name='editcardapio'),
+    url(r'prep_cardapio/(?P<id_dia_cardapio>\d+)/$', 'cardapio.views.prep_cardapio', name='prep_cardapio'),
 
  ]
