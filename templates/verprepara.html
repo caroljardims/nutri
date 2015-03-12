@@ -11,24 +11,24 @@
 			<br /><br />
 			<div class="thumbnail col-sm-4">
 				<h3>{{ p.desc }}</h3>
-				<p>Tipo: {{ p.tipoPrep }}</p>
-				<p>Cocção: {{ p.coccao }}</p>
-				<p>In Natura: 
+				<p><label>Tipo:</label> {{ p.tipoPrep }}</p>
+				<p><label>Cocção:</label> {{ p.coccao }}</p>
+				<p><label>In Natura: </label> 
 				{% if p.inNatura == 1 %}	
 				Sim
 				{% else %}
 				Não
 				{% endif %}</p>
-				<p>Enxofre: 
+				<p><label>Enxofre: </label>
 				{% if p.enxofre == 1 %}	
 				Sim
 				{% else %}
 				Não
 				{% endif %}</p>
-				<p>Cor: {{ p.cor }}</p>
+				<p><label>Cor: </label> {{ p.cor }}</p>
 
 				{% if lista %}
-				<p>Alimentos:
+				<p><label>Alimentos: </label>
 					{% for i in lista %}
 						<br /> - {{ i }}  
 					{% endfor %}

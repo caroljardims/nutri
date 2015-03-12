@@ -1,24 +1,36 @@
 {% extends "base.html" %}
 
 {% block body%}
+{% load static %}
 <div class="container-fluid">
 	<div class="container">
-			<h2>Auxiliares</h2>           
+			<h2>Auxiliares</h2>         
 			<a href="/addcardapio/"><button type="button" class="btn btn-info">Adicionar</button></a>
 			<h3>Cardápios</h3>
 		{% if c_list %}
-			<div class="thumbnail col-sm-6">
+		{% for m in mes %}
+			<div class="thumbnail col-sm-3">
+				<label>
+					{% if m == 1 %}Janeiro{% elif m == 2 %}Fevereiro{% elif m == 2 %}Fevereiro{% elif m == 3 %}Março
+					{% elif m == 4 %}Abril{% elif m == 5 %}Maio{% elif m == 6 %}Junho{% elif m == 7 %}Julho
+					{% elif m == 8 %}Agosto{% elif m == 9 %}Setembro{% elif m == 10 %}Outubro{% elif m == 11 %}Novembro
+					{% elif m == 12 %}Dezembro{% endif %}
+				</label>
 				{% for c in c_list %}
+				<!-- m|divisibleby:4 -->
+				{% if c.mes == m %}
 				<ul class="list-group">
 				<li class="list-group-item">
-					<label>Dia: <a href="/vercardapio/{{ c.id }}"> {{ c.data }}</a> </label> - 
-					<a href="/editcardapio/{{ c.id }}"> Editar</a> / 
-					<a href="/deletecardapio/{{ c.id }}"> Deletar </a> / 
-					<a href="/prep_cardapio/{{ c.id }}"> Adicionar Preparações </a>
+					<label>Dia: <a href="/vercardapio/{{ c.id }}"> {{ c.dia }} </a> </label> 
+					<a href="/editcardapio/{{ c.id }}"><img src="{% static "img/edit.png" %}" style="display:inline-block" /></a> 
+					<a href="/deletecardapio/{{ c.id }}"><img src="{% static "img/delete.png" %}" style="display:inline-block" /></a> 
+					<a href="/prep_cardapio/{{ c.id }}"> <img src="{% static "img/add.png" %}" style="display:inline-block" /></a>
 				</li>
 				</ul>
+				{% endif %}
 			{% endfor %}
 			</div>
+		{% endfor %}
 		{% endif %} 
 	
 </div>

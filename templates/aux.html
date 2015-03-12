@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block body%}
+{% load static %}
 <div class="container-fluid">
 	<div class="container">
 			<h2>Auxiliares</h2>           
@@ -9,39 +10,39 @@
 		{% if aux_list %}
 
 		<div class="thumbnail col-sm-3">
-			<h5> Categorias de Alimentos </h5>
+			<h4> Categorias de Alimentos </h4>
 			{% for aux in aux_list %}
 			{% if aux.tipo == 1 %}
 			<ul class="list-group">
-			<li class="list-group-item">{{ aux.desc }} - 
-				<a href="/editaux/{{ aux.id }}"> Editar</a> / 
-				<a href="/deleteaux/{{ aux.id }}"> Deletar </a>
+			<li class="list-group-item"> <label>{{ aux.desc }} </label>
+				<a href="/editaux/{{ aux.id }}"><img src="{% static "img/edit.png" %}" style="display:inline-block" /></a> 
+				<a href="/deleteaux/{{ aux.id }}"><img src="{% static "img/delete.png" %}" style="display:inline-block" /></a>
 			</li>
 			</ul>
 			{% endif %}
 			{% endfor %}
 		</div>	
 		<div class="thumbnail col-sm-3">
-			<h5> Tipos de Preparo </h5>
+			<h4> Tipos de Preparo </h4>
 			{% for aux in aux_list %}
 			{% if aux.tipo == 2 %}
 			<ul class="list-group">
-			<li class="list-group-item">{{ aux.desc }} - 
-				<a href="/editaux/{{ aux.id }}"> Editar</a> / 
-				<a href="/deleteaux/{{ aux.id }}"> Deletar </a>
+			<li class="list-group-item"><label>{{ aux.desc }} </label>
+				<a href="/editaux/{{ aux.id }}"><img src="{% static "img/edit.png" %}" style="display:inline-block" /></a> 
+				<a href="/deleteaux/{{ aux.id }}"><img src="{% static "img/delete.png" %}" style="display:inline-block" /></a>
 			</li>
 			</ul>
 			{% endif %}
 			{% endfor %}
 		</div>	
 		<div class="thumbnail col-sm-3">
-			<h5> Cocção </h5>
+			<h4> Cocção </h4>
 			{% for aux in aux_list %}
 			{% if aux.tipo == 3 %}
 			<ul class="list-group">
-			<li class="list-group-item">{{ aux.desc }} - 
-				<a href="/editaux/{{ aux.id }}"> Editar</a> / 
-				<a href="/deleteaux/{{ aux.id }}"> Deletar </a>
+			<li class="list-group-item"><label>{{ aux.desc }} </label>
+				<a href="/editaux/{{ aux.id }}"><img src="{% static "img/edit.png" %}" style="display:inline-block" /></a> 
+				<a href="/deleteaux/{{ aux.id }}"><img src="{% static "img/delete.png" %}" style="display:inline-block" /></a>
 			</li>
 			</ul>
 			{% endif %}

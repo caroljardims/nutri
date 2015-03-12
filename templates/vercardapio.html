@@ -7,10 +7,10 @@
 			<a href="/editcardapio/{{ c.id }}"><button type="button" class="btn btn-info">Editar</button></a>
 			<a href="/deletecardapio/{{ c.id }}"><button type="button" class="btn btn-danger">Deletar</button></a>
 			<a href="/cardapios/"><button type="button" class="btn btn-default">Voltar</button></a>
-			<a href="/addcardapio/"><button type="button" class="btn btn-info">Adicionar Novo</button></a>
+			<a href="/prep_cardapio/{{ c.id }}"><button type="button" class="btn btn-info">Adicionar Preparações</button></a>
 			<br /><br />
 			<div class="thumbnail col-sm-4">
-				<h3>Dia: {{ c.data }}</h3>
+				<h3>Dia: {{ c.dia }}/{{ c.mes }}</h3>
 				{% if p_card %}
 					{% for p in p_card %}
 						<br />- {{ p.prep.desc }}

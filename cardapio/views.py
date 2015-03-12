@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from django.shortcuts import render
 from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
@@ -265,7 +266,9 @@ def prep_alimentos(request,id_prepara):
 
 def cardapios(request):
 	c_list = Dia_Cardapio.objects.all()
-	context = {'c_list':c_list}
+	mes = []
+	for i in range(0,12): mes.append(i+1)
+	context = {'c_list':c_list,'mes':mes}
 	return render_to_response('cardapios.html', context)
 
 
@@ -275,8 +278,7 @@ def addcardapio(request):
 	if request.method == 'POST':
 		f_dia = request.POST.get('dia')
 		f_mes = request.POST.get('mes')
-		data = f_dia + '/' + f_mes
-		dia = Dia_Cardapio(data=data)
+		dia = Dia_Cardapio(dia=f_dia,mes=f_mes,ano=2015)
 		dia.save()
 		return redirect('/cardapios')
 	context = {'form': form}
@@ -321,7 +323,7 @@ def prep_cardapio(request,id_dia_cardapio):
 	contem_list = []
 
 	for o in lista:
-		if o.dia.data == c.data:
+		if o.dia.dia == c.dia and o.dia.mes == c.mes and o.dia.ano == c.ano:
 			card_list.append(o)
 	for p in card_list:
 		contem_list.append(p.prep)
@@ -339,7 +341,7 @@ def prep_cardapio(request,id_dia_cardapio):
 	if request.method == 'POST' and 'delete' in request.POST:
 		f_prep = request.POST.get('prep')
 		for a in lista1:
-			if a.prep.desc == f_prep and a.dia.data == c.data:
+			if a.prep.desc == f_prep and a.dia.dia == c.dia and a.dia.mes == c.mes and a.dia.ano == c.ano:
 				a.delete()
 				return redirect('/prep_cardapio/' + id_dia_cardapio)
 		

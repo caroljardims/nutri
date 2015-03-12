@@ -32,7 +32,9 @@ class Prep_Alimentos(models.Model):
 		return self.desc
 
 class Dia_Cardapio(models.Model):
-	data = models.CharField(max_length=10)
+	dia = models.IntegerField(max_length=2)
+	mes = models.IntegerField(max_length=2)
+	ano = models.IntegerField(max_length=2)
 	def __unicode__(self):
 		return self.data
 

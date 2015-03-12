@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block body%}
+{% load static %}
 <div class="container-fluid">
 	<div class="container">
 			<h2>Auxiliares</h2>           
@@ -10,16 +11,15 @@
 			{% for t in aux_list %}				
 				{% if t.tipo == 2 %}
 				<div class="thumbnail col-sm-3">
-					{{ t.desc }}
-					
+					<h4>{{ t.desc }}</h4>
 					{% for a in p_list %}
 					{% if a.tipoPrep == t.desc %}
 					<ul class="list-group">
 					<li class="list-group-item">
-						<a href="/verprepara/{{ a.id }}"> {{ a.desc }}</a> - 
-						<a href="/editprepara/{{ a.id }}"> Editar</a> / 
-						<a href="/deleteprepara/{{ a.id }}"> Deletar </a> / 
-						<a href="/prep_alimentos/{{ a.id }}"> Adicionar Alimentos </a>
+						<label><a href="/verprepara/{{ a.id }}"> {{ a.desc }}</a> </label>
+						<a href="/editprepara/{{ a.id }}"><img src="{% static "img/edit.png" %}" style="display:inline-block" /></a> 
+						<a href="/deleteprepara/{{ a.id }}"><img src="{% static "img/delete.png" %}" style="display:inline-block" /></a> 
+						<a href="/prep_alimentos/{{ a.id }}"><img src="{% static "img/add.png" %}" style="display:inline-block" /></a>
 					</li>
 					</ul>
 					{% endif %}

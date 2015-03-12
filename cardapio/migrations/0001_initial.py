@@ -37,12 +37,35 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
+            name='Dia_Cardapio',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('dia', models.IntegerField(max_length=2)),
+                ('mes', models.IntegerField(max_length=2)),
+                ('ano', models.IntegerField(max_length=2)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Alimentos',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('desc', models.CharField(max_length=20)),
                 ('cat_alimento', models.ForeignKey(to='cardapio.Aux', to_field='id')),
                 ('cor', models.CharField(max_length=10)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Cardapio_Prep',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('dia', models.ForeignKey(to='cardapio.Dia_Cardapio', to_field='id')),
+                ('prep', models.ForeignKey(to='cardapio.Prepara', to_field='id')),
             ],
             options={
             },

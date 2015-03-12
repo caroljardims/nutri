@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block body%}
+{% load static %}
 <div class="container-fluid">
 	<div class="container">
 			<h2>Auxiliares</h2>           
@@ -11,9 +12,9 @@
 		<div class="thumbnail col-sm-6">
 			{% for a in al_list %}
 			<ul class="list-group">
-			<li class="list-group-item"><a href="/veralimento/{{ a.id }}"> {{ a.desc }} </a> - 
-				<a href="/editalimento/{{ a.id }}"> Editar</a> / 
-				<a href="/deletealimento/{{ a.id }}"> Deletar </a>
+			<li class="list-group-item"><a href="/veralimento/{{ a.id }}"> <label>{{ a.desc }}</label> </a> 
+				<a href="/editalimento/{{ a.id }}"><img src="{% static "img/edit.png" %}" style="display:inline-block" /></a> 
+				<a href="/deletealimento/{{ a.id }}"><img src="{% static "img/delete.png" %}" style="display:inline-block" /></a>
 			</li>
 			</ul>
 			{% endfor %}
