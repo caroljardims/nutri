@@ -36,7 +36,7 @@ def home(request):
 
 
 def aux(request):
-	aux_list = Aux.objects.all()
+	aux_list = Aux.objects.all().order_by('desc')
 	context = {'aux_list':aux_list}
 	return render_to_response('aux.html', context)
 
@@ -83,12 +83,12 @@ def editaux(request, id_aux):
 
 
 def alimentos(request):
-	al_list = Alimentos.objects.all()
+	al_list = Alimentos.objects.all().order_by('desc')
 	context = {'al_list':al_list}
 	return render_to_response('alimentos.html', context)
 
 def addalimento(request):
-	aux_list = Aux.objects.all()
+	aux_list = Aux.objects.all().order_by('desc')
 	f = modelformset_factory(Alimentos,AlimentosForm)
 	form = f(request.POST or None)
 	if request.method == 'POST':
@@ -112,7 +112,7 @@ def deletealimento(request,id_alimentos):
    return render(request,"delete.html", context)
 
 def editalimento(request, id_alimentos):
-	aux_list = Aux.objects.all()
+	aux_list = Aux.objects.all().order_by('desc')
 	f = modelformset_factory(Aux,AuxForm)
 	form = f(request.POST or None)
 	al = get_object_or_404(Alimentos, pk=id_alimentos)
@@ -142,13 +142,13 @@ def editalimento(request, id_alimentos):
 
 
 def prepara(request):
-	p_list = Prepara.objects.all()
+	p_list = Prepara.objects.all().order_by('desc')
 	aux_list = Aux.objects.all()
 	context = {'p_list':p_list,'aux_list':aux_list}
 	return render_to_response('prepara.html', context)
 
 def addprepara(request):
-	aux_list = Aux.objects.all()
+	aux_list = Aux.objects.all().order_by('desc')
 	f = modelformset_factory(Alimentos,AlimentosForm)
 	form = f(request.POST or None)
 	if request.method == 'POST':
@@ -166,8 +166,8 @@ def addprepara(request):
 
 def verprepara(request, id_prepara):
 	p = get_object_or_404(Prepara, pk=id_prepara)
-	al_list = Alimentos.objects.all()
-	lista = Prep_Alimentos.objects.all()
+	al_list = Alimentos.objects.all().order_by('desc')
+	lista = Prep_Alimentos.objects.all().order_by('desc')
 	prep_al_list = []
 	contem_list = []
 	for o in lista:
@@ -185,7 +185,7 @@ def deleteprepara(request,id_prepara):
    return render(request,"delete.html", context)
 
 def editprepara(request, id_prepara):
-	aux_list = Aux.objects.all()
+	aux_list = Aux.objects.all().order_by('desc')
 	f = modelformset_factory(Aux,AuxForm)
 	form = f(request.POST or None)
 	al = get_object_or_404(Prepara, pk=id_prepara)
@@ -219,10 +219,10 @@ def editprepara(request, id_prepara):
 
 
 def prep_alimentos(request,id_prepara):
-	al_list = Alimentos.objects.all()
+	al_list = Alimentos.objects.all().order_by('desc')
 	prepara = get_object_or_404(Prepara, pk=id_prepara)
-	lista = Prep_Alimentos.objects.all()
-	lista1 = Prep_Alimentos.objects.all()
+	lista = Prep_Alimentos.objects.all().order_by('desc')
+	lista1 = Prep_Alimentos.objects.all().order_by('desc')
 	prep_al_list = []
 	contem_list = []
 
@@ -265,7 +265,7 @@ def prep_alimentos(request,id_prepara):
 
 
 def cardapios(request):
-	c_list = Dia_Cardapio.objects.all()
+	c_list = Dia_Cardapio.objects.all().order_by('dia')
 	mes = []
 	for i in range(0,12): mes.append(i+1)
 	context = {'c_list':c_list,'mes':mes}
@@ -286,8 +286,12 @@ def addcardapio(request):
 
 
 def vercardapio(request,id_dia_cardapio):
-	p_card = Cardapio_Prep.objects.all()
+	card = Cardapio_Prep.objects.all()
 	c = get_object_or_404(Dia_Cardapio, pk=id_dia_cardapio)
+	p_card = []
+	for p in card:
+		if p.dia.dia == c.dia and p.dia.mes == c.mes and p.dia.ano == c.ano:
+			p_card.append(p)
 
 	context = {'p_card':p_card,'c':c}
 	return render(request,"vercardapio.html",context)
@@ -327,7 +331,7 @@ def prep_cardapio(request,id_dia_cardapio):
 			card_list.append(o)
 	for p in card_list:
 		contem_list.append(p.prep)
-	
+
 	lista = list(set(prepara)-set(contem_list))
 
 	f = modelformset_factory(Cardapio_Prep,CardapioPrepForm)
