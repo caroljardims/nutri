@@ -6,10 +6,10 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from datetime import datetime
 from django.forms.models import modelformset_factory
 from cardapio.models import *
 from cardapio.forms import *
+from cardapio.rules import *
 
     #############
     #           #
@@ -266,8 +266,11 @@ def prep_alimentos(request,id_prepara):
 
 def cardapios(request):
 	c_list = Dia_Cardapio.objects.all().order_by('dia')
+	card = Cardapio_Prep.objects.all()
 	mes = []
 	for i in range(0,12): mes.append(i+1)
+	for j in card: 
+		regra1(j)
 	context = {'c_list':c_list,'mes':mes}
 	return render_to_response('cardapios.html', context)
 
@@ -288,6 +291,7 @@ def addcardapio(request):
 def vercardapio(request,id_dia_cardapio):
 	card = Cardapio_Prep.objects.all()
 	c = get_object_or_404(Dia_Cardapio, pk=id_dia_cardapio)
+	#regra1(c)
 	p_card = []
 	for p in card:
 		if p.dia.dia == c.dia and p.dia.mes == c.mes and p.dia.ano == c.ano:
@@ -339,7 +343,8 @@ def prep_cardapio(request,id_dia_cardapio):
 
 	if request.method == 'POST' and 'add' in request.POST:
 		f_prep = request.POST.get('prep')
-		card = Cardapio_Prep(prep_id=f_prep, dia_id = id_dia_cardapio).save()
+		card = Cardapio_Prep(prep_id=f_prep, dia_id = id_dia_cardapio, r1=0,r2=0,r3_1=0,r3_2=0,r4=0,r5=0,r6=0,r7=0,r8=0,r9=0,r10=0)
+		card.save()
 		return redirect('/prep_cardapio/' + id_dia_cardapio)
 
 	if request.method == 'POST' and 'delete' in request.POST:

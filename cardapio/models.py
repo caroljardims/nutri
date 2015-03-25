@@ -36,10 +36,21 @@ class Dia_Cardapio(models.Model):
 	mes = models.IntegerField(max_length=2)
 	ano = models.IntegerField(max_length=2)
 	def __unicode__(self):
-		return self.data
+		return self.dia
 
 class Cardapio_Prep(models.Model):
 	dia = models.ForeignKey(Dia_Cardapio)
 	prep = models.ForeignKey(Prepara)
+	r1 = models.IntegerField(max_length=1)
+	r2 = models.IntegerField(max_length=1)
+	r3_1 = models.IntegerField(max_length=1)
+	r3_2 = models.IntegerField(max_length=1)
+	r4 = models.IntegerField(max_length=1)
+	r5 = models.IntegerField(max_length=1)
+	r6 = models.IntegerField(max_length=1)
+	r7 = models.IntegerField(max_length=1)
+	r8 = models.IntegerField(max_length=1)
+	r9 = models.IntegerField(max_length=1)
+	r10 = models.IntegerField(max_length=1)
 	def __unicode__(self):
-		return self.dia.data
+		return self.dia.dia
